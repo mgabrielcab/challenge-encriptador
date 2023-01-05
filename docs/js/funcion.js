@@ -119,7 +119,7 @@ if (encriptado != "" || descifrado != "") {
 
 
 
-navigator.serviceWorker.register("../sw.js").then(function (registration) {
+navigator.serviceWorker.register("/docs/sw.js").then(function (registration) {
   console.log("El servicio de trabajo se ha registrado correctamente: ", registration );
 })
 .catch(function (error) {
