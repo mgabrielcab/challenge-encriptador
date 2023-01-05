@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width = device-width">
+    <title>Encriptador - Challenge Alura</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/estilo.css" />
+    <link rel="shortcut icon" href="img/Vectora.svg" type="image/x-icon" />
+    <link rel="manifest" href="json/manifest.json">
+
+  </head>
+  <body>
+    <div class="logo">
+      <img src="img/Vectora.svg" alt="Logo de Alura" />
+    </div>
+    <!-- <input type="text" name="entrada"class="entrada" id="entrada" placeholder="Ingrese el texto aqui..."/> -->
+    <div class="contenedor">
+      <div class="ingreso">
+        <textarea name="entrada" id="entrada" class="entrada" cols="6" rows="6" placeholder="Ingrese el texto aquí"></textarea>
+      </div>
+
+      <div class="rectangulo">
+        <div class="solucion">
+          <p></p>
+        </div>
+        <button class="copiar">Copiar</button>
+        <div class="ocultar">
+            <img src="img/persona.png" alt="hombre con lupa" class="muneco" id="muneco" />
+            <p id="sinmensaje">Ningún mensaje fue encontrado</p>
+            <p id="instrucciones">Ingresa el texto que desees encriptar o desencriptar.</p>
+        </div>
+      </div>
+    </div>
+    <div class="acciones">
+      <div class="info">
+       <img src="img/Groupinformacion.png" />
+       <p>Solo letras y minúsculas y sin acentos</p>
+      </div>
+    <div class="botones">
+      <input type="button" value="Encriptar" class="encriptar" id="encriptar">
+      <input type="button" value="Desencriptar" class="desencriptar">
+    </div>
+    </div>
+    <script src="js/funcion.js"></script>
+    <!-- <script>
+      navigator.serviceWorker.register("sw.js").then(function (registration) {
+    console.log("El servicio de trabajo se ha registrado correctamente: ", registration );
+  })
+  .catch(function (error) {
+    console.log("Error al registrar el servicio de trabajo: ", error);
+  });
+    </script> -->
+
+    <footer>
+      <p class="copy">&copy Copyright Marcelo Gabriel Cabaña - 2022</p>
+    </footer>
+  </body>
+</html>
