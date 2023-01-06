@@ -9,7 +9,10 @@ const assets = [
   "img/Vectora.png",
   "img/Vectora.svg",
   "js/funcion.js",
+  "json/manifest.json",
 ];
+var cacheName = "GabbDev";
+
 /* El código anterior está instalando el trabajador de servicio. */
 self.addEventListener("install", function (event) {
   console.log("El servicio de trabajo está instalando");
@@ -18,12 +21,38 @@ self.addEventListener("install", function (event) {
       return cache.addAll(assets);
     })
   );
+  self.skipWaiting();
 });
 
+/* Este es el código que está manejando la solicitud. */
 self.addEventListener("fetch", (fetchEvent) => {
+  console.log(
+    "El servicio de trabajo esta manejando la solicitud de:",
+    event.request.url
+  );
   fetchEvent.respondWith(
     caches.match(fetchEvent.request).then((res) => {
       return res || fetch(fetchEvent.request);
+    })
+  );
+});
+
+/* Un detector de eventos de búsqueda. */
+self.addEventListener("fetch", (fetchEvent) => {
+  fetchEvent.respondWith(
+    caches.match(fetchEvent.request).then((res) => {
+      if (res) {
+        // Si el recurso existe en la caché, lo devuelvo
+        return res;
+      } else {
+        // Si no existe, hago una petición al servidor y almaceno el recurso en la caché
+        return fetch(fetchEvent.request).then((response) => {
+          return caches.open("mi-cache").then((cache) => {
+            cache.put(fetchEvent.request, response.clone());
+            return response;
+          });
+        });
+      }
     })
   );
 });
