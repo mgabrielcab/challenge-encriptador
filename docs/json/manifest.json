@@ -7,7 +7,7 @@
   "lang": "es-AR",
   "display": "standalone",
   "icons": [{
-    "src": "/docs/img/logo.png",
+    "src": "../img/logo.png",
     "sizes":"192x192",
     "type": "image/png",
     "purpose": "any"

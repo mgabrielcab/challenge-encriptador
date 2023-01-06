@@ -28,7 +28,7 @@ self.addEventListener("install", function (event) {
 self.addEventListener("fetch", (fetchEvent) => {
   console.log(
     "El servicio de trabajo esta manejando la solicitud de:",
-    event.request.url
+    fetchEvent.request.url
   );
   fetchEvent.respondWith(
     caches.match(fetchEvent.request).then((res) => {
@@ -37,22 +37,15 @@ self.addEventListener("fetch", (fetchEvent) => {
   );
 });
 
-/* Un detector de eventos de búsqueda. */
-self.addEventListener("fetch", (fetchEvent) => {
-  fetchEvent.respondWith(
-    caches.match(fetchEvent.request).then((res) => {
-      if (res) {
-        // Si el recurso existe en la caché, lo devuelvo
-        return res;
-      } else {
-        // Si no existe, hago una petición al servidor y almaceno el recurso en la caché
-        return fetch(fetchEvent.request).then((response) => {
-          return caches.open("mi-cache").then((cache) => {
-            cache.put(fetchEvent.request, response.clone());
-            return response;
-          });
-        });
-      }
-    })
+
+/* Borrando el caché antiguo. */
+self.addEventListener('activate', event => {
+  console.log("Borrando Cache");
+  event.waitUntil(
+    caches.keys().then(cacheNames => Promise.all(
+      cacheNames.filter(cacheName => {
+        return cacheName !== "mi-cache"
+      }).map(cacheName => caches.delete(cacheName))
+    ))
   );
 });
